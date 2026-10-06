@@ -6,8 +6,9 @@ The games our afternoon meeting plays, on one page, and a button that picks one.
 - **"Was spielen wir?"** The draw spins a reel through the games like a slot machine and lands on
   one; a ring in that game's colours runs out through the dot field behind the page. "Let's go"
   opens the game in a new tab, "Again" draws a different one (never the same twice in a row).
-- **All ten games at a glance:** skribbl.io, Gartic Phone, Codenames, Travle, Impromptu, Songlio,
-  Guess the Price, GeoGuessr, CurveCrash and HaxBall, in the order the team listed them. Each card
+- **All eleven games at a glance:** skribbl.io, Gartic Phone, Codenames, Travle, Impromptu, Songlio,
+  Guess the Price, Schätzle (our own take on it, schaetzle.ewolution.cloud), GeoGuessr, CurveCrash and
+  HaxBall, in the order the team listed them. Each card
   says in a sentence how the game plays, what kind it is, and whether it's every player for
   themselves, teams, or everyone together. GeoGuessr is marked as needing an account.
 - **Filter by kind:** Creative, Guessing, Geo, Action. The draw only picks from what the filter

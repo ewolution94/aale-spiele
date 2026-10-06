@@ -18,10 +18,10 @@ test('every game is complete and links out over https', () => {
   }
 });
 
-test('the list is the team’s ten, in their order', () => {
+test('the list is the team’s ten, in their order, plus our own Schätzle beside Guess the Price', () => {
   assert.deepEqual(
     GAMES.map(host),
-    ['skribbl.io', 'garticphone.com', 'codenames.game', 'travle.earth', 'impromptu.fun', 'songl.io', 'guess-the-price.de', 'geoguessr.com', 'curvecrash.com', 'haxball.com'],
+    ['skribbl.io', 'garticphone.com', 'codenames.game', 'travle.earth', 'impromptu.fun', 'songl.io', 'guess-the-price.de', 'schaetzle.ewolution.cloud', 'geoguessr.com', 'curvecrash.com', 'haxball.com'],
   );
 });
 

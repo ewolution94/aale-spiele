@@ -18,6 +18,8 @@ export const GLYPHS: Record<string, string> = {
   songlio: '<path class="i" d="M37 44 V14 C42 16 47 19 47 26"/><circle class="k" cx="30" cy="44" r="7.5"/>',
   // A gauge: how close was the guess. The spark is the needle's pivot.
   'guess-the-price': '<path class="i" d="M13 43 A19 19 0 0 1 51 43"/><path class="i" d="M32 43 L41 30"/><circle class="k" cx="32" cy="43" r="5"/>',
+  // Schätzle's own mark (schaetzle/brand): "Was kostet das?", the dot is the guess.
+  schaetzle: '<path class="i" d="M23.5 24 C23.5 14.5 40.5 14.5 40.5 24 C40.5 31 32 31.5 32 39"/><circle class="k" cx="32" cy="48.5" r="4.5"/>',
   // A map pin; the spark is the spot.
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.

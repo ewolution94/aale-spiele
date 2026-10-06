@@ -128,6 +128,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (schaetzle.ewolution.cloud): Guess the Price rebuilt for this meeting, in OTTO's red.
+    slug: 'schaetzle',
+    name: 'Schätzle',
+    url: 'https://schaetzle.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa'],
+    ground: ['#dc001d', '#a30016'],
+    ink: '#ffffff',
+    spark: '#212121',
+    text: {
+      de: 'Unsere eigene Version von Guess the Price: Artikel ansehen, Preis tippen, wer am nächsten dran ist, punktet. Beitreten mit Code, ohne Konto.',
+      en: 'Our own take on Guess the Price: look at an item, guess its price, the closest guess scores. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',
