@@ -1,0 +1,79 @@
+/* Folio's shared tokens and fonts (vendor/ewo, from `npm run vendor -- aale-spiele` in Folio).
+   The page itself is monochrome with the app's pink as its accent (data-ewo-project on <body>);
+   the colour comes from the games, each on its own tile. */
+@import '../vendor/ewo/tokens/index.css';
+@import '../vendor/ewo/tokens/base.css';
+
+:root {
+  --gutter: clamp(16px, 3vw, 40px);
+  --page: 1120px;
+  --bar-h: 60px;
+  /* Cards and the draw panel: Folio's --ewo-panel made opaque, so the dot field (and its tint
+     under the pointer) never runs through the text. */
+  --surface: light-dark(#ffffff, #161619);
+}
+
+/* The page colour lives on <html> only, so the fixed dot field (z-index 0) shows through
+   <body>, whose own background would otherwise paint over it. */
+body {
+  background: transparent;
+  font-size: 15px;
+}
+
+html {
+  overflow-x: clip;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 8px var(--gutter) 56px;
+}
+
+/* In the browser (not installed), Safari's toolbar floats over the bottom of the page. */
+@media not (display-mode: standalone) {
+  @supports (-webkit-touch-callout: none) {
+    main {
+      padding-bottom: 132px;
+    }
+  }
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* While the page scrolls, cards slide under a resting cursor; their hover states wait until it
+   stops (src/lib/scrolling.ts). Only for a mouse: touch has no hover to protect. */
+@media (hover: hover) and (pointer: fine) {
+  :root[data-scrolling] main {
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
