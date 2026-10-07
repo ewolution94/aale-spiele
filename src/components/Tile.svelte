@@ -53,6 +53,13 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+  /* A solid shape in the ink, for a mark drawn as a silhouette (Vollmond's wolf). */
+  .tile :global(.s) {
+    fill: var(--ink);
+    stroke: var(--ink);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
   .tile :global(.k) {
     fill: var(--spark);
   }

@@ -143,6 +143,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (vollmond.ewolution.cloud): Werewolf with the app as the narrator, its cards woodcuts.
+    slug: 'vollmond',
+    name: 'Vollmond',
+    url: 'https://vollmond.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['teams'],
+    ground: ['#2d3893', '#1f2668'],
+    ink: '#f1e8d4',
+    spark: '#ff4d9d',
+    text: {
+      de: 'Unser eigenes Werwolf: Die App erzählt, jeder hat seine geheime Karte, das Dorf sucht die Wölfe. Im Videocall oder am Tisch, beitreten mit Code, ohne Konto.',
+      en: 'Our own Werewolf: the app narrates, everyone holds a secret card, the village hunts the wolves. On a call or at one table, join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',
