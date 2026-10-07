@@ -6,6 +6,8 @@
 export const GLYPHS: Record<string, string> = {
   // A pencil; the spark is the point that draws.
   skribbl: '<path class="i" d="M40 13 L51 24 L29 46 L16 49 L18 35 Z"/><path class="i" d="M34 19 L45 30"/><circle class="k" cx="16" cy="49" r="4.5"/>',
+  // Kritzle's own mark (kritzle/brand): a scribble looping across a sheet, the spark the pen's tip.
+  kritzle: '<rect class="i" x="12.9" y="16.4" width="38.2" height="31.2" rx="2.8" transform="rotate(-6 32 32)" opacity=".5"/><path class="i" d="M15.9 44.3 C20 37.7 24.2 33.5 26.3 29.4 C28.3 25.5 23.8 23.8 22.5 27.8 C21 32.5 26.6 40 32.9 36.8 C37.9 34.4 38.4 28.6 34.7 28.4 C31.3 28.4 32.9 37.7 39.8 37.7 C44 37.7 46.3 33.5 48.1 30.2"/><circle class="k" cx="49.2" cy="28.1" r="4"/>',
   // Two speech bubbles, one passing to the next; the spark is what's being passed on.
   'gartic-phone': '<path class="i" d="M16 11 H32 Q38 11 38 17 V22 Q38 28 32 28 H22 L15 33 V27 Q11 26 11 21 V16 Q11 11 16 11 Z"/><path class="i" d="M32 33 H48 Q53 33 53 38 V43 Q53 48 49 49 V55 L42 50 H32 Q26 50 26 44 V39 Q26 33 32 33 Z"/><circle class="k" cx="39.5" cy="41.5" r="4.2"/>',
   // Four of the 25 cards; the spark is the agent found.

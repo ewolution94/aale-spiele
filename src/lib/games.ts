@@ -44,6 +44,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (kritzle.ewolution.cloud): draw-and-guess like skribbl.io, in a sketchbook.
+    slug: 'kritzle',
+    name: 'Kritzle',
+    url: 'https://kritzle.ewolution.cloud/',
+    group: 'creative',
+    modes: ['ffa'],
+    ground: ['#d6f85c', '#b3e42a'],
+    ink: '#2b2d33',
+    spark: '#ff6f4f',
+    text: {
+      de: 'Unser eigenes Zeichen- und Ratespiel: Einer zeichnet, alle raten im Chat, mit selbst gebautem Avatar und einer Galerie mit Zeitraffer am Ende. Beitreten mit Code, ohne Konto.',
+      en: 'Our own draw-and-guess: one draws, everyone guesses in the chat, with an avatar you build and a gallery of timelapses at the end. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'gartic-phone',
     name: 'Gartic Phone',
     url: 'https://garticphone.com/de',
