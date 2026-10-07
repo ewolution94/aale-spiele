@@ -1,7 +1,7 @@
 // Applies the saved theme and language before first paint, so there's no flash of the wrong
 // one, and pins theme-color to the theme (it colours an installed app's status bar). The keys
-// are the shared ones (`ewo:theme`, `ewo:lang`); keep in step with src/lib/i18n.svelte.ts and
-// Folio's <ewo-theme-toggle>.
+// are the shared ones (`ewo:theme`, `ewo:lang`; a missing key means System); keep in step with
+// src/lib/i18n.svelte.ts and src/lib/theme.svelte.ts (Folio's setTheme).
 try {
   var theme = localStorage.getItem('ewo:theme');
   if (theme === 'light' || theme === 'dark') {

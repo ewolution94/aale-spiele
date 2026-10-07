@@ -1,23 +1,10 @@
 <script lang="ts">
-  import { i18n, setLang, t } from '../lib/i18n.svelte';
-  import type { Lang } from '../lib/games';
+  import { t } from '../lib/i18n.svelte';
 </script>
 
 <footer class="foot">
   <a href="https://ewolution.cloud/">ewolution.cloud</a>
   <a href="https://apps.ewolution.cloud/">{t('allApps')}</a>
-  <span class="end">
-    <ewo-segmented
-      size="sm"
-      label={t('language')}
-      value={i18n.lang}
-      options={[
-        { value: 'de', label: 'DE' },
-        { value: 'en', label: 'EN' },
-      ]}
-      onchange={(e) => setLang(e.detail.value as Lang)}
-    ></ewo-segmented>
-  </span>
 </footer>
 
 <style>
@@ -41,10 +28,5 @@
   }
   a:hover {
     color: var(--ewo-fg);
-  }
-  .end {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
   }
 </style>

@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { t } from '../lib/i18n.svelte';
+  import Settings from './Settings.svelte';
 
   let scrolled = $state(false);
+  let settings = $state(false);
   onMount(() => {
     const check = () => (scrolled = scrollY > 8);
     check();
@@ -22,8 +23,12 @@
     <img src="/icon.svg" alt="" width="28" height="28" />
     <span class="word"><span class="aale">Aale</span> Spiele</span>
   </a>
-  <ewo-theme-toggle label-light={t('toLight')} label-dark={t('toDark')}></ewo-theme-toggle>
+  <!-- A real <button> inside (Folio's element): Enter and Space click it, the click reaches here. -->
+  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+  <ewo-settings-button onclick={() => (settings = true)}></ewo-settings-button>
 </header>
+
+<Settings bind:open={settings} />
 
 <style>
   .bar {
