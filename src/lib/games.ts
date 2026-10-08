@@ -87,6 +87,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (cdnms.ewolution.cloud): Codenames in the Akte look, with picture cards and bots.
+    slug: 'cdnms',
+    name: 'CDNMS',
+    url: 'https://cdnms.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['teams'],
+    ground: ['#e8d6a6', '#d2b97c'],
+    ink: '#22201c',
+    spark: '#c8322b',
+    text: {
+      de: 'Unser eigenes Codenames: ein Wort und eine Zahl, 25 Karten, Wörter oder Bilder. Den Schlüssel sehen nur die Geheimdienstchefs, auf Wunsch spielen Bots mit. Beitreten mit Code, ohne Konto.',
+      en: 'Our own Codenames: one word and a number, 25 cards, words or pictures. Only the spymasters see the key, and bots can fill in. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'travle',
     name: 'Travle',
     url: 'https://travle.earth/',

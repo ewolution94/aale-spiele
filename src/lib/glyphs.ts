@@ -12,6 +12,9 @@ export const GLYPHS: Record<string, string> = {
   'gartic-phone': '<path class="i" d="M16 11 H32 Q38 11 38 17 V22 Q38 28 32 28 H22 L15 33 V27 Q11 26 11 21 V16 Q11 11 16 11 Z"/><path class="i" d="M32 33 H48 Q53 33 53 38 V43 Q53 48 49 49 V55 L42 50 H32 Q26 50 26 44 V39 Q26 33 32 33 Z"/><circle class="k" cx="39.5" cy="41.5" r="4.2"/>',
   // Four of the 25 cards; the spark is the agent found.
   codenames: '<rect class="i" x="13" y="13" width="16" height="16" rx="4"/><rect class="i" x="35" y="13" width="16" height="16" rx="4"/><rect class="i" x="13" y="35" width="16" height="16" rx="4"/><rect class="i" x="35" y="35" width="16" height="16" rx="4"/><circle class="k" cx="43" cy="43" r="4.5"/>',
+  // CDNMS's own mark (plans/app-icons): an agent in a fedora, solid (`.s`) like the app icon; the
+  // spark is the hat's band, a bar like the logo's blacked-out vowels.
+  cdnms: '<path class="s" d="M23.6 28.3 L25.6 18.8 Q32 16.4 38.4 18.8 L40.4 28.3 Z"/><path class="k" d="M24.6 23.8 H39.4 L39.1 26.5 H24.9 Z"/><path class="i" d="M15.8 29.4 H48.3"/><circle class="s" cx="32" cy="37.3" r="5.3"/><path class="s" d="M18.8 50.8 C18.8 44.8 24.5 42.9 32 42.9 C39.5 42.9 45.3 44.8 45.3 50.8 Z"/>',
   // A route from country to country; the spark is the destination.
   travle: '<circle class="i" cx="16" cy="47" r="4.5"/><path class="i" d="M19.5 43 L27 32 L36 38 L44 26"/><circle class="k" cx="47.5" cy="20.5" r="4.8"/>',
   // A painting from a prompt; the spark is its sun.
