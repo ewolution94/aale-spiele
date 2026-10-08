@@ -44,7 +44,9 @@ export function startField(canvas: HTMLCanvasElement) {
     ink = getComputedStyle(canvas).color;
     const theme = document.documentElement.dataset.theme ?? (dark.matches ? 'dark' : 'light');
     light = theme === 'light';
-    base = light ? 0.12 : 0.09;
+    // Quiet on purpose: at 0.12 / 0.09 the grid read as a pattern on top of the page (the user,
+    // 2026-10-08). Atrium's and Schätzle's fields use the same values.
+    base = light ? 0.045 : 0.035;
   }
 
   function resize() {
@@ -102,13 +104,13 @@ export function startField(canvas: HTMLCanvasElement) {
 
         if (w > 0.06) {
           ctx!.fillStyle = wave!.colors[n % wave!.colors.length];
-          ctx!.globalAlpha = Math.min(1, 0.15 + w);
+          ctx!.globalAlpha = Math.min(1, 0.075 + 0.5 * w);
         } else if (k > 0.04 && tint) {
           ctx!.fillStyle = tint;
-          ctx!.globalAlpha = Math.min(1, 0.2 + k);
+          ctx!.globalAlpha = Math.min(1, 0.1 + 0.6 * k);
         } else {
           ctx!.fillStyle = ink;
-          ctx!.globalAlpha = base + 0.45 * k;
+          ctx!.globalAlpha = base + 0.22 * k;
         }
         ctx!.fillRect(x + ox - size, y + oy - size, size * 2, size * 2);
       }
