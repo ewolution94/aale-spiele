@@ -188,6 +188,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (stichle.ewolution.cloud): Wizard on letterpress cards, flicked from the hand on the phone.
+    slug: 'stichle',
+    name: 'Stichle',
+    url: 'https://stichle.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa'],
+    ground: ['#2f7d55', '#143f2a'],
+    ink: '#ffffff',
+    spark: '#e9c66a',
+    text: {
+      de: 'Unser eigenes Wizard: Sag an, wie viele Stiche du machst, und mach genau so viele. Karten zum Kippen und Schnippen auf dem Handy, Bots und ein großer Bildschirm. Beitreten mit Code, ohne Konto.',
+      en: 'Our own Wizard: say how many tricks you’ll take, then take exactly that many. Cards to tilt and flick on the phone, bots and a big screen. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',
