@@ -31,6 +31,9 @@ export const GLYPHS: Record<string, string> = {
   // Stichle's own mark (stichle/brand): one card face down, the compass rose of its back, the gold
   // heart the spark.
   stichle: '<rect class="i" x="18.3" y="12.8" width="27.4" height="38.4" rx="3.8" transform="rotate(-8 32 32)"/><path class="s" d="M36.5 26.0 L34.8 31.4 L32.0 32.0 L31.8 29.2 Z M38.0 36.5 L32.6 34.8 L32.0 32.0 L34.8 31.8 Z M27.5 38.0 L29.2 32.6 L32.0 32.0 L32.2 34.8 Z M26.0 27.5 L31.4 29.2 L32.0 32.0 L29.2 32.2 Z M30.3 19.6 L34.2 28.7 L32.0 32.0 L29.0 29.4 Z M44.4 30.3 L35.3 34.2 L32.0 32.0 L34.6 29.0 Z M33.7 44.4 L29.8 35.3 L32.0 32.0 L35.0 34.6 Z M19.6 33.7 L28.7 29.8 L32.0 32.0 L29.4 35.0 Z"/><circle class="k" cx="32" cy="32" r="2.6"/>',
+  // Stammtisch's own mark (stammtisch/brand): the German deck's acorn standing in its cup, solid
+  // (`.s`) like the app icon; the spark is the gold glint on the nut.
+  stammtisch: '<path class="s" d="M32 11.1C33.6 12.7 41.9 15.9 41.9 24.7C41.9 29 40.9 30.6 39.6 31.2H24.4C23.1 30.6 22.1 29 22.1 24.7C22.1 15.9 30.4 12.7 32 11.1Z"/><path class="s" d="M18.9 33.2C18.5 41.4 24.1 47.3 32 47.7C40 47.3 45.5 41.4 45.1 33.2Z M30.2 46.5H33.8V51.3H30.2Z"/><circle class="k" cx="27.8" cy="20.7" r="3"/>',
   // A map pin; the spark is the spot.
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.

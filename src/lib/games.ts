@@ -203,6 +203,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (stammtisch.ewolution.cloud): the classic card games in the German deck, at one table.
+    slug: 'stammtisch',
+    name: 'Stammtisch',
+    url: 'https://stammtisch.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa', 'teams'],
+    ground: ['#7f2038', '#4a0d1d'],
+    ink: '#ffffff',
+    spark: '#f3dc94',
+    text: {
+      de: 'Unsere Klassiker an einem Tisch: Mau-Mau, Doppelkopf, Skat und Durak, mit dem deutschen Blatt und euren Hausregeln. Die Karten in der Hand auf dem Handy, Bots für leere Plätze. Beitreten mit Code, ohne Konto.',
+      en: 'Our classic card games at one table: Mau-Mau, Doppelkopf, Skat and Durak, in the German deck, with your house rules. Your cards in your hand on the phone, bots for empty seats. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',
