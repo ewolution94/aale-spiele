@@ -218,6 +218,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (wuerfle.ewolution.cloud): the classic five-dice game, glass dice you flick or shake.
+    slug: 'wuerfle',
+    name: 'Würfle',
+    url: 'https://wuerfle.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa'],
+    ground: ['#4566f0', '#1f3bb3'],
+    ink: '#ffffff',
+    spark: '#f0c75e',
+    text: {
+      de: 'Unser Würfelspiel mit fünf Würfeln: werfen mit einem Wisch oder einem Schütteln des Handys, behalten, eintragen, bis zu sechs Spiele auf einem Block wie aus Papier. Allein oder zusammen, Bots für leere Plätze. Beitreten mit Code, ohne Konto.',
+      en: 'Our five-dice game: throw with a flick or a shake of the phone, keep, write it down, up to six games on a block like the paper one. Alone or together, bots for empty seats. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',

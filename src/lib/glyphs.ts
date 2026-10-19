@@ -34,6 +34,9 @@ export const GLYPHS: Record<string, string> = {
   // Stammtisch's own mark (stammtisch/brand): the German deck's acorn standing in its cup, solid
   // (`.s`) like the app icon; the spark is the gold glint on the nut.
   stammtisch: '<path class="s" d="M32 11.1C33.6 12.7 41.9 15.9 41.9 24.7C41.9 29 40.9 30.6 39.6 31.2H24.4C23.1 30.6 22.1 29 22.1 24.7C22.1 15.9 30.4 12.7 32 11.1Z"/><path class="s" d="M18.9 33.2C18.5 41.4 24.1 47.3 32 47.7C40 47.3 45.5 41.4 45.1 33.2Z M30.2 46.5H33.8V51.3H30.2Z"/><circle class="k" cx="27.8" cy="20.7" r="3"/>',
+  // Würfle's own mark (wuerfle/brand): one of its dice showing five, tipped a little, the corner pips
+  // cut through to the ground, the gold middle pip the spark.
+  wuerfle: '<g transform="rotate(-10 32 32)"><rect class="s" x="18" y="18" width="28" height="28" rx="6.5"/><circle cx="25" cy="25" r="3.1" fill="#1f3bb3"/><circle cx="39" cy="25" r="3.1" fill="#1f3bb3"/><circle cx="25" cy="39" r="3.1" fill="#1f3bb3"/><circle cx="39" cy="39" r="3.1" fill="#1f3bb3"/><circle class="k" cx="32" cy="32" r="3.4"/></g>',
   // A map pin; the spark is the spot.
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.
