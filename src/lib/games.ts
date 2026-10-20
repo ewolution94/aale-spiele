@@ -248,6 +248,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (skibbo.ewolution.cloud): the stock-pile card game, its cards enamel number plates.
+    slug: 'skibbo',
+    name: 'Skibbo',
+    url: 'https://skibbo.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa', 'teams'],
+    ground: ['#e86fd8', '#9f2294'],
+    ink: '#ffffff',
+    spark: '#78c7fd',
+    text: {
+      de: 'Unser Kartenspiel mit dem Vorrat: vier Stapel von 1 bis 12, aus der Hand, vom Vorrat und von der Ablage legen, und wer den Vorrat zuerst leer hat, gewinnt. Allein gegen Bots oder zusammen am Tisch, auch zu zweit im Team. Beitreten mit Code, ohne Konto.',
+      en: 'Our stock-pile card game: four piles from 1 to 12, played onto from your hand, your stock and your discard piles, and whoever empties their stock first wins. Alone against bots or together at a table, in teams of two too. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',

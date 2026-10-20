@@ -40,6 +40,9 @@ export const GLYPHS: Record<string, string> = {
   // Yksi's own mark (yksi/brand): the deck's four signs, the triangle, the square and the diamond solid
   // (`.s`), the circle the sun, the spark.
   yksi: '<path class="s" d="M21.5 12.2 30.4 28.2H12.6Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><rect class="s" x="14.4" y="35.2" width="14.2" height="14.2" rx="1.4"/><path class="s" d="M42.5 33.2 50.5 42.3 42.5 51.4 34.5 42.3Z"/><circle class="k" cx="42.5" cy="21.3" r="8"/>',
+  // Skibbo's own mark (skibbo/brand): a house-number sign hanging from its screw, tipped a little, the
+  // Joker's star cut out to the ground; the screw is the spark.
+  skibbo: '<g transform="rotate(-5 32 15)"><path d="M21 26 32 15 43 26" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><rect class="s" x="12" y="24" width="40" height="28" rx="4.5"/><path d="M32 29.6l1.9 4.1 4.5.5-3.4 3 1 4.4-4-2.3-4 2.3 1-4.4-3.4-3 4.5-.5z" fill="#9f2294" stroke="#9f2294" stroke-width="1" stroke-linejoin="round"/></g><circle class="k" cx="32" cy="15" r="3.6"/>',
   // A map pin; the spark is the spot.
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.
