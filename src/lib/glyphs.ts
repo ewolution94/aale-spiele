@@ -37,6 +37,9 @@ export const GLYPHS: Record<string, string> = {
   // Würfle's own mark (wuerfle/brand): one of its dice showing five, tipped a little, the corner pips
   // cut through to the ground, the gold middle pip the spark.
   wuerfle: '<g transform="rotate(-10 32 32)"><rect class="s" x="18" y="18" width="28" height="28" rx="6.5"/><circle cx="25" cy="25" r="3.1" fill="#1f3bb3"/><circle cx="39" cy="25" r="3.1" fill="#1f3bb3"/><circle cx="25" cy="39" r="3.1" fill="#1f3bb3"/><circle cx="39" cy="39" r="3.1" fill="#1f3bb3"/><circle class="k" cx="32" cy="32" r="3.4"/></g>',
+  // Yksi's own mark (yksi/brand): the deck's four signs, the triangle, the square and the diamond solid
+  // (`.s`), the circle the sun, the spark.
+  yksi: '<path class="s" d="M21.5 12.2 30.4 28.2H12.6Z" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><rect class="s" x="14.4" y="35.2" width="14.2" height="14.2" rx="1.4"/><path class="s" d="M42.5 33.2 50.5 42.3 42.5 51.4 34.5 42.3Z"/><circle class="k" cx="42.5" cy="21.3" r="8"/>',
   // A map pin; the spark is the spot.
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.

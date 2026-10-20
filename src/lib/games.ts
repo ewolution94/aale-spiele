@@ -233,6 +233,21 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (yksi.ewolution.cloud): the colour-matching card game, its four signs in print, the call "yksi!".
+    slug: 'yksi',
+    name: 'Yksi',
+    url: 'https://yksi.ewolution.cloud/',
+    group: 'guessing',
+    modes: ['ffa'],
+    ground: ['#1fb5c9', '#007183'],
+    ink: '#ffffff',
+    spark: '#fbd530',
+    text: {
+      de: 'Unser Kartenspiel: Farbe oder Zahl, Aktionskarten, und vor der letzten Karte „yksi!“ rufen, bevor dich jemand erwischt. Allein gegen Bots oder zusammen am Tisch. Beitreten mit Code, ohne Konto.',
+      en: 'Our card game: match the colour or the number, play the action cards, and call “yksi!” before your last card or get caught. Alone against bots or together at a table. Join with a code, no account.',
+    },
+  },
+  {
     slug: 'geoguessr',
     name: 'GeoGuessr',
     url: 'https://www.geoguessr.com/de',
