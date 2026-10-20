@@ -258,7 +258,7 @@ export const GAMES: Game[] = [
     ink: '#ffffff',
     spark: '#78c7fd',
     text: {
-      de: 'Unser Kartenspiel mit dem Vorrat: vier Stapel von 1 bis 12, aus der Hand, vom Vorrat und von der Ablage legen, und wer den Vorrat zuerst leer hat, gewinnt. Allein gegen Bots oder zusammen am Tisch, auch zu zweit im Team. Beitreten mit Code, ohne Konto.',
+      de: 'Unser Kartenspiel mit dem eigenen Stapel: vier Aufbaustapel von 1 bis 12, aus der Hand, vom Stapel und von der Ablage legen, und wer den Stapel zuerst leer hat, gewinnt. Allein gegen Bots oder zusammen am Tisch, auch zu zweit im Team. Beitreten mit Code, ohne Konto.',
       en: 'Our stock-pile card game: four piles from 1 to 12, played onto from your hand, your stock and your discard piles, and whoever empties their stock first wins. Alone against bots or together at a table, in teams of two too. Join with a code, no account.',
     },
   },
