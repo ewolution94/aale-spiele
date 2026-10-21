@@ -1,7 +1,8 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import { buttonColor, host, type Game } from '../lib/games';
-  import { pick, strip } from '../lib/pick';
+  import { reelPick, reelStrip } from '../../vendor/ewo/elements/reel-strip.js';
+  import type { EwoSlotReel } from '../../vendor/ewo/elements/slot-reel.js';
   import { ripple } from '../lib/field';
   import { i18n, t } from '../lib/i18n.svelte';
   import Tile from './Tile.svelte';
@@ -15,50 +16,26 @@
   /** What the reel holds: one row at rest, the whole strip while it spins. null is the idle row. */
   let rows: (Game | null)[] = $state.raw([null]);
   let spinning = $state(false);
-  let track: HTMLElement;
-  let windowEl: HTMLElement;
+  let reel: EwoSlotReel;
 
   async function draw() {
     if (spinning || !pool.length) return;
     const previous = chosen ? pool.findIndex((g) => g.slug === chosen!.slug) : -1;
-    const target = pick(pool.length, previous);
+    const target = reelPick(pool.length, previous);
     const winner = pool[target];
 
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      rows = [winner];
-      chosen = winner;
-      return;
-    }
-
     spinning = true;
-    // The strip starts with whatever the window shows now, so the spin doesn't jump.
-    const seq = strip(pool.length, target, 16 + Math.floor(Math.random() * 5), previous).map((i) => pool[i]);
+    // The strip starts with whatever the window shows now, so the spin doesn't jump. Folio's reel
+    // pulls back, runs, lands on the last row and shines; under reduced motion it lands at once.
+    const seq = reelStrip(pool.length, target, 16 + Math.floor(Math.random() * 5), previous).map((i) => pool[i]);
     rows = previous >= 0 ? seq : [chosen, ...seq];
     await tick();
-
-    // A row is --row tall (smaller on a phone).
-    const end = (rows.length - 1) * (track.firstElementChild as HTMLElement).offsetHeight;
-    const spin = track.animate(
-      [
-        { transform: 'translate3d(0, 0, 0)', easing: 'cubic-bezier(0.18, 0.62, 0.28, 1)' },
-        // A slot machine's settle: just past the winner, then back onto it.
-        { transform: `translate3d(0, ${-end - 14}px, 0)`, offset: 0.88, easing: 'cubic-bezier(0.45, 0, 0.4, 1)' },
-        { transform: `translate3d(0, ${-end}px, 0)` },
-      ],
-      { duration: 2100, fill: 'forwards' },
-    );
-    try {
-      await spin.finished;
-    } catch {
-      // cancelled: settle on the winner all the same
-    }
+    await reel.spin({ duration: 2100 });
     rows = [winner];
-    await tick();
-    spin.cancel();
     chosen = winner;
     spinning = false;
 
-    const box = windowEl.getBoundingClientRect();
+    const box = reel.getBoundingClientRect();
     ripple(box.left + box.width / 2, box.top + box.height / 2, [winner.ground[0], winner.spark, winner.ground[1]]);
   }
 </script>
@@ -67,8 +44,7 @@
   <div class="glow" aria-hidden="true"></div>
   <h1 id="question" class="sr-only">{t('question')}</h1>
 
-  <div class="window" class:spinning bind:this={windowEl}>
-    <div class="track" bind:this={track}>
+  <ewo-slot-reel class="reel" bind:this={reel}>
       {#each rows as game, i (i)}
         <div class="row">
           {#if game}
@@ -83,8 +59,7 @@
           {/if}
         </div>
       {/each}
-    </div>
-  </div>
+  </ewo-slot-reel>
 
   <p class="text" class:hidden={spinning || !chosen}>{chosen ? chosen.text[i18n.lang] : ''}</p>
 
@@ -156,16 +131,20 @@
     transition: background 0.6s;
   }
 
-  .window {
+  /* Folio's <ewo-slot-reel>: one row tall, the edges fading while it spins. */
+  .reel {
     width: min(100%, 460px);
-    height: var(--row);
-    overflow: hidden;
+    --ewo-reel-row: var(--row);
+    --ewo-reel-sheen: light-dark(rgb(255 255 255 / 0.75), rgb(255 255 255 / 0.22));
   }
-  .window.spinning {
-    mask-image: linear-gradient(transparent, #000 22%, #000 78%, transparent);
+  /* The winner gives a little hop as the reel lands. */
+  .reel:global([landed]) .row {
+    animation: landed 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
   }
-  .track {
-    will-change: transform;
+  @keyframes landed {
+    40% {
+      scale: 1.06;
+    }
   }
   .row {
     display: flex;

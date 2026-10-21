@@ -5,6 +5,7 @@ import '../vendor/ewo/elements/sheet.js';
 import '../vendor/ewo/elements/settings-button.js';
 import '../vendor/ewo/elements/settings-basics.js';
 import '../vendor/ewo/elements/segmented.js';
+import '../vendor/ewo/elements/slot-reel.js';
 
 import { mount } from 'svelte';
 import App from './App.svelte';

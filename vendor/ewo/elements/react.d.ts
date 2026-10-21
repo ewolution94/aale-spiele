@@ -10,7 +10,7 @@
 // can produce this from custom-elements.json.
 
 import type { DOMAttributes, HTMLAttributes, Key, Ref } from 'react';
-import type { EwoBadge, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
+import type { EwoBadge, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
 
 type Base<E> = Omit<HTMLAttributes<E>, 'onChange' | 'onInput' | 'onLoad' | 'onError' | 'onCancel' | 'onClose'> &
   Pick<DOMAttributes<E>, 'children'> & {
@@ -80,6 +80,7 @@ declare module 'react' {
       'ewo-connection': Base<EwoConnection> & { state?: 'connecting' | 'reconnecting' | 'online'; 'connecting-label'?: string; 'reconnecting-label'?: string; 'back-label'?: string };
       'ewo-sheet': Base<EwoSheet> & { open?: boolean; label?: string; wide?: boolean; placement?: 'center' | 'top'; oncancel?: Handler<void>; onclose?: Handler<void> };
       'ewo-guide': Base<EwoGuide> & { open?: boolean; label?: string; 'next-label'?: string; 'back-label'?: string; 'done-label'?: string; 'skip-label'?: string; oncancel?: Handler<void>; onclose?: Handler<void>; ondone?: Handler<void>; onpage?: Handler<{ index: number }> };
+      'ewo-slot-reel': Base<EwoSlotReel> & { rows?: 1 | 3 | '1' | '3'; rest?: number; ontick?: Handler<{ index: number }>; onland?: Handler<{ index: number }> };
       'ewo-theme-toggle': Base<EwoThemeToggle> & { cycle?: boolean; 'label-light'?: string; 'label-dark'?: string };
       'ewo-settings-button': Base<EwoSettingsButton> & { label?: string; 'show-label'?: boolean };
       'ewo-settings-basics': Base<EwoSettingsBasics> & {

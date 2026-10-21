@@ -21,13 +21,15 @@ The games our afternoon meeting plays, on one page, and a button that picks one.
 
 ## How it works
 
-There's no API and no state. `src/lib/games.ts` is the list; `src/lib/pick.ts` draws a game and
-builds the reel's strip (pure functions, tested). The server serves the built page, forwards Census's
+There's no API and no state. `src/lib/games.ts` is the list; Folio's `reel-strip.js` draws a game and
+builds the reel's strip (pure functions, tested in Folio). The server serves the built page, forwards Census's
 beacon, and nothing else.
 
-- **The reel** is one row tall. A draw fills it with a strip of about 20 games that starts at
-  whatever the window shows and ends on the winner, and slides it with the Web Animations API (a
-  transform only, so it runs on the compositor), overshooting a little and settling back.
+- **The reel** is Folio's `<ewo-slot-reel>` (since 2026-10-21; the randomiser uses it too), one row tall. A
+  draw fills it with a strip of about 20 games that starts at whatever the window shows and ends on the
+  winner; the reel pulls back a little, runs through it (blurred at full speed), passes the winner by a
+  third of a row and settles back, and a sheen crosses it as the winner gives a little hop. Only a
+  transform moves, on the compositor; with reduced motion it lands at once.
 - **The background** is Atrium's dot field (`src/lib/field.ts`): it draws only while the pointer
   moves or a ripple runs, never on scroll, and ignores touch moves.
 - **The "Let's go" button** takes the game's colour, darkened until its label has 4.5:1 contrast
@@ -70,7 +72,6 @@ This mirrors Cantina and Atrium:
 server/server.mjs         static files + security headers, no dependencies
 server/census.mjs         forwards /_e.js and /_e to Census (visit counts)
 src/lib/games.ts          the games: links, texts (DE/EN), kinds, tile colours
-src/lib/pick.ts           the draw and the reel's strip
 src/lib/glyphs.ts         each game's mark (64-unit SVG)
 src/lib/field.ts          the dot field and the draw's ripple
 src/components/           Picker (the draw), Games + GameCard, Tile, Bar, Footer

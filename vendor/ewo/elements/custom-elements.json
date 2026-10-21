@@ -528,7 +528,7 @@
               "name": "--ewo-emblem-tag-ink"
             },
             {
-              "description": "The tag's first colour (mint); -1 … -9 the others, in TAG_COLOURS' order.",
+              "description": "The tag's first colour (mint); -1 … -13 the others, in TAG_COLOURS' order.",
               "name": "--ewo-emblem-tag-0"
             }
           ],
@@ -2351,6 +2351,315 @@
           "declaration": {
             "name": "EwoSkeleton",
             "module": "skeleton.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "slot-reel.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A slot machine's reel: the app renders the strip as children and awaits `spin()`.",
+          "name": "EwoSlotReel",
+          "cssProperties": [
+            {
+              "description": "A row's height (default 84px).",
+              "name": "--ewo-reel-row"
+            },
+            {
+              "description": "How far the edges fade while it spins (default 22%, 30% with three rows).",
+              "name": "--ewo-reel-fade"
+            },
+            {
+              "description": "The light that crosses the window as it lands.",
+              "name": "--ewo-reel-sheen"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "window"
+            },
+            {
+              "name": "track"
+            },
+            {
+              "name": "sheen"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The strip: one child per row.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[styles]"
+            },
+            {
+              "kind": "field",
+              "name": "track",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "this.root.querySelector('.track')!"
+            },
+            {
+              "kind": "field",
+              "name": "sheen",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "this.root.querySelector('.sheen')!"
+            },
+            {
+              "kind": "field",
+              "name": "strip",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private",
+              "readonly": true,
+              "default": "this.root.querySelector('slot')!"
+            },
+            {
+              "kind": "field",
+              "name": "running",
+              "type": {
+                "text": "Promise<void> | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "motion",
+              "type": {
+                "text": "Animation | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "frame",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "landedTimer",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "rest",
+              "type": {
+                "text": "number"
+              },
+              "description": "The row in the middle of the window at rest."
+            },
+            {
+              "kind": "field",
+              "name": "spinning",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether a spin is running.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "spin",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "options",
+                  "default": "{}",
+                  "type": {
+                    "text": "SpinOptions"
+                  }
+                }
+              ],
+              "description": "Spins from `from` to `to` (rows of the strip); resolves once it has landed. A second call while it runs gets the same promise."
+            },
+            {
+              "kind": "method",
+              "name": "rows",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLElement[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "rowHeight",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "offset",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "The track's offset that puts row `index` in the middle of the window."
+            },
+            {
+              "kind": "method",
+              "name": "place",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "run",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "SpinOptions"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "land",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "shine",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "innerHTML",
+              "type": {
+                "text": "string"
+              },
+              "default": "'<div class=\"window\" part=\"window\"><div class=\"track\" part=\"track\"><slot></slot></div><div class=\"sheen\" part=\"sheen\"></div></div>'"
+            }
+          ],
+          "events": [
+            {
+              "description": "A row passed the middle of the window: `detail.index`.",
+              "name": "tick"
+            },
+            {
+              "description": "The spin is over: `detail.index` is the row it landed on.",
+              "name": "land"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "rest",
+              "type": {
+                "text": "number"
+              },
+              "description": "The row in the middle of the window at rest (default 0)."
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "'1' | '3'"
+              },
+              "description": "The window's height in rows; 3 shows the neighbours, faded (default 1)."
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set by the element while a spin runs.",
+              "name": "spinning"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set by the element for a moment after it lands.",
+              "name": "landed"
+            }
+          ],
+          "superclass": {
+            "name": "EwoElement",
+            "module": "/packages/elements/src/base"
+          },
+          "tagName": "ewo-slot-reel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "EwoSlotReel",
+          "declaration": {
+            "name": "EwoSlotReel",
+            "module": "slot-reel.js"
           }
         }
       ]

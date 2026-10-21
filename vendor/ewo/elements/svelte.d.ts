@@ -6,7 +6,7 @@
 // listens for the element's own change event.
 
 import type { HTMLAttributes } from 'svelte/elements';
-import type { EwoBadge, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
+import type { EwoBadge, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
 
 type Handler<E, D> = (event: CustomEvent<D> & { currentTarget: E }) => void;
 
@@ -48,6 +48,7 @@ declare module 'svelte/elements' {
     'ewo-connection': HTMLAttributes<EwoConnection> & { state?: 'connecting' | 'reconnecting' | 'online'; 'connecting-label'?: string; 'reconnecting-label'?: string; 'back-label'?: string };
     'ewo-sheet': Omit<HTMLAttributes<EwoSheet>, 'oncancel' | 'onclose'> & { open?: boolean; label?: string; wide?: boolean; placement?: 'center' | 'top'; oncancel?: Handler<EwoSheet, void>; onclose?: Handler<EwoSheet, void> };
     'ewo-guide': Omit<HTMLAttributes<EwoGuide>, 'oncancel' | 'onclose'> & { open?: boolean; label?: string; 'next-label'?: string; 'back-label'?: string; 'done-label'?: string; 'skip-label'?: string; oncancel?: Handler<EwoGuide, void>; onclose?: Handler<EwoGuide, void>; ondone?: Handler<EwoGuide, void>; onpage?: Handler<EwoGuide, { index: number }> };
+    'ewo-slot-reel': HTMLAttributes<EwoSlotReel> & { rows?: 1 | 3 | '1' | '3'; rest?: number; ontick?: Handler<EwoSlotReel, { index: number }>; onland?: Handler<EwoSlotReel, { index: number }> };
     'ewo-theme-toggle': HTMLAttributes<EwoThemeToggle> & { cycle?: boolean; 'label-light'?: string; 'label-dark'?: string };
     'ewo-settings-button': HTMLAttributes<EwoSettingsButton> & { label?: string; 'show-label'?: boolean };
     'ewo-settings-basics': HTMLAttributes<EwoSettingsBasics> & {

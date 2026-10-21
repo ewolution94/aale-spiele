@@ -7,6 +7,8 @@ export { EwoTicks, type Tick, type TickState } from './ticks';
 export { EwoToaster, toast, type ToastOptions, type ToastTone } from './toaster';
 export { EwoSheet } from './sheet';
 export { EwoGuide, firstVisit } from './guide';
+export { EwoSlotReel, type SpinOptions } from './slot-reel';
+export { reelPick, reelStrip, reelMotion, REEL, type ReelMotionOptions } from './reel-strip';
 export { EwoThemeToggle, setTheme, storedTheme, restoreTheme, type ThemeChoice } from './theme-toggle';
 export { EwoHalftone } from './halftone';
 export { themeShift } from './theme-shift';
