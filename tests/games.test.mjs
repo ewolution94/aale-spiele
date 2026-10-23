@@ -19,10 +19,10 @@ test('every game is complete and links out over https', () => {
   }
 });
 
-test('the list is the team’s ten, in their order, plus our own Kritzle beside skribbl.io, Schätzle beside Guess the Price, CDNMS beside Codenames, and Vollmond', () => {
+test('the list is the team’s ten, in their order, plus our own Kritzle beside skribbl.io, Schätzle beside Guess the Price, CDNMS beside Codenames, CurveExtreme beside CurveCrash, and Vollmond', () => {
   assert.deepEqual(
     GAMES.map(host),
-    ['skribbl.io', 'kritzle.ewolution.cloud', 'garticphone.com', 'codenames.game', 'cdnms.ewolution.cloud', 'travle.earth', 'impromptu.fun', 'songl.io', 'guess-the-price.de', 'schaetzle.ewolution.cloud', 'vollmond.ewolution.cloud', 'stichle.ewolution.cloud', 'stammtisch.ewolution.cloud', 'wuerfle.ewolution.cloud', 'yksi.ewolution.cloud', 'skibbo.ewolution.cloud', 'geoguessr.com', 'curvecrash.com', 'haxball.com'],
+    ['skribbl.io', 'kritzle.ewolution.cloud', 'garticphone.com', 'codenames.game', 'cdnms.ewolution.cloud', 'travle.earth', 'impromptu.fun', 'songl.io', 'guess-the-price.de', 'schaetzle.ewolution.cloud', 'vollmond.ewolution.cloud', 'stichle.ewolution.cloud', 'stammtisch.ewolution.cloud', 'wuerfle.ewolution.cloud', 'yksi.ewolution.cloud', 'skibbo.ewolution.cloud', 'geoguessr.com', 'curvecrash.com', 'curveextreme.ewolution.cloud', 'haxball.com'],
   );
 });
 

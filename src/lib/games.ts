@@ -292,6 +292,22 @@ export const GAMES: Game[] = [
     },
   },
   {
+    // Ours (curveextreme.ewolution.cloud): CurveCrash recreated, its steering measured from its replays;
+    // the only black card, the arena itself with the curve on it.
+    slug: 'curveextreme',
+    name: 'CurveExtreme',
+    url: 'https://curveextreme.ewolution.cloud/',
+    group: 'action',
+    modes: ['ffa', 'teams'],
+    ground: ['#1d1a26', '#07060b'],
+    ink: '#b07aff',
+    spark: '#ffa133',
+    text: {
+      de: 'Unser eigenes CurveCrash: eine Linie, die nie anhält, Lücken zum Durchschlüpfen, alle 25 Power-ups. Beitreten mit Code, bis zu zehn, ohne Konto; oder zu viert an einer Tastatur.',
+      en: 'Our own CurveCrash: a line that never stops, gaps to slip through, all 25 power-ups. Join with a code, up to ten, no account; or four on one keyboard.',
+    },
+  },
+  {
     slug: 'haxball',
     name: 'HaxBall',
     url: 'https://www.haxball.com/',

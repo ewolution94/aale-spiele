@@ -47,6 +47,9 @@ export const GLYPHS: Record<string, string> = {
   geoguessr: '<path class="i" d="M32 53 C25 45 18 38 18 28 A14 14 0 0 1 46 28 C46 38 39 45 32 53 Z"/><circle class="k" cx="32" cy="28" r="4.8"/>',
   // Two trails; the spark is the head about to crash into the other one.
   curvecrash: '<path class="i" d="M11 22 C30 22 30 45 53 45"/><path class="i" d="M13 52 C17 47 20 45 23 43"/><circle class="k" cx="27" cy="40" r="4.5"/>',
+  // CurveExtreme's own mark (curveextreme/brand): one curve sweeping up and over with a gap in it, the
+  // head at its end the spark.
+  curveextreme: '<path class="i" d="M14.3 50 C14.3 34.8 21.5 18.8 34.3 18.8"/><path class="i" d="M40.8 19.9 C46.5 21.5 49.8 26.8 49.8 34.3"/><circle class="k" cx="49.8" cy="36.6" r="4.4"/>',
   // The pitch from above, halfway line and all; the spark is the ball.
   haxball: '<rect class="i" x="10" y="15" width="44" height="34" rx="7"/><path class="i" d="M32 15 V49"/><circle class="k" cx="43" cy="32" r="5"/>',
   // Nothing drawn yet: a question mark whose dot is the spark.
