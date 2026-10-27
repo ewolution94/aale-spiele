@@ -1,7 +1,8 @@
 <script lang="ts">
   import { tick } from 'svelte';
+  import { drawIndex } from '../lib/draw';
   import { buttonColor, host, type Game } from '../lib/games';
-  import { reelPick, reelStrip } from '../../vendor/ewo/elements/reel-strip.js';
+  import { reelStrip } from '../../vendor/ewo/elements/reel-strip.js';
   import type { EwoSlotReel } from '../../vendor/ewo/elements/slot-reel.js';
   import { ripple } from '../lib/field';
   import { i18n, t } from '../lib/i18n.svelte';
@@ -21,7 +22,8 @@
   async function draw() {
     if (spinning || !pool.length) return;
     const previous = chosen ? pool.findIndex((g) => g.slug === chosen!.slug) : -1;
-    const target = reelPick(pool.length, previous);
+    // The winner first, from crypto; the reel only plays its way there.
+    const target = drawIndex(pool.length, previous);
     const winner = pool[target];
 
     spinning = true;

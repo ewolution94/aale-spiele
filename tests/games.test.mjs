@@ -2,8 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 // Node runs the TypeScript sources directly (type stripping, Node 24).
 import { GAMES, GROUPS, buttonColor, contrast, host } from '../src/lib/games.ts';
-// The draw and the reel's strip are Folio's now (its tests cover them); this checks the vendored copy.
-import { reelPick, reelStrip } from '../vendor/ewo/elements/reel-strip.js';
+// The reel's strip is Folio's (its tests cover it); this checks the vendored copy. The draw itself is
+// src/lib/draw.ts (draw.test.mjs).
+import { reelStrip } from '../vendor/ewo/elements/reel-strip.js';
+import { drawIndex } from '../src/lib/draw.ts';
 
 test('every game is complete and links out over https', () => {
   const slugs = new Set();
@@ -38,10 +40,10 @@ test('every filter has games in it', () => {
   for (const group of GROUPS) assert.ok(GAMES.some((g) => g.group === group), group);
 });
 
-test('the vendored draw never repeats the previous game and its strip lands on the winner', () => {
+test('the draw never repeats the previous game and the vendored strip lands on the winner', () => {
   for (let previous = 0; previous < 10; previous++) {
-    for (let r = 0; r < 1; r += 0.05) {
-      const target = reelPick(10, previous, () => r);
+    for (let w = 0; w < 2 ** 32; w += 2 ** 27) {
+      const target = drawIndex(10, previous, () => w);
       assert.notEqual(target, previous);
       const strip = reelStrip(10, target, 18, previous);
       assert.equal(strip[0], previous);
