@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>ewolution94/renovate-config"],
+  "description": "The pilot (development/plans/upkeep.md): no Monday wait while it runs. Remove the three schedules when it's done.",
+  "schedule": ["at any time"],
+  "automergeSchedule": ["at any time"],
+  "lockFileMaintenance": { "schedule": ["at any time"] }
+}
