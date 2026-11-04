@@ -21,9 +21,19 @@ The games our afternoon meeting plays, on one page, and a button that picks one.
 
 ## How it works
 
-There's no API and no state. `src/lib/games.ts` is the list; Folio's `reel-strip.js` draws a game and
+There's no state of its own. `src/lib/games.ts` is the list; Folio's `reel-strip.js` draws a game and
 builds the reel's strip (pure functions, tested in Folio). The server serves the built page, forwards Census's
-beacon, and nothing else.
+beacon, and takes the games' order and on/off from Dashboard.
+
+- **Dashboard** (dashboard.ewolution.cloud, the owner's control center) turns each game on or off and
+  puts them in order. The build writes the manifest from `games.ts` (`src/lib/family.ts` →
+  `dist/ewo.config.json`), so a new game shows up there with its next deploy. The server announces it
+  and asks for the values every 15 s with an ETag (Folio's `config-server`), puts them into the page as
+  a JSON block (`#ewo-config`), and `src/lib/config.ts` shows the games they leave on, in their order;
+  a kind with none left drops out of the filter. Until Dashboard answers, or while it's down, every
+  game shows in `games.ts`'s order, exactly as before. Never part of `/healthz`.
+- **`/games.json`** is that same list with each game's tile drawing (name, address, colours, mark),
+  for Atrium's tile.
 
 - **The reel** is Folio's `<ewo-slot-reel>` (since 2026-10-21; the randomiser uses it too), one row tall. A
   draw fills it with a strip of about 20 games that starts at whatever the window shows and ends on the
@@ -45,7 +55,7 @@ beacon, and nothing else.
 npm install
 npm run dev          # http://localhost:5620 (5600 is the NAS port)
 npm run check        # svelte-check / TypeScript
-npm test             # unit tests: the games, the draw, the Census forwarder (Node 24+)
+npm test             # unit tests: the games, the draw, Dashboard's manifest and values, the Census forwarder (Node 24+)
 npm run build && npm start   # production server on :8080 (or --port 5621)
 ```
 
@@ -58,13 +68,15 @@ This mirrors Cantina and Atrium:
   amd64 and arm64.
 - The shared Watchtower picks the image up. With this setup, a push to `release` is the whole deploy.
 - The NAS runs `deploy/portainer-stack.yml`, on port **5600**.
-- The stack joins the external Docker network `ewolution`, where Census listens as `census:4901`.
+- The stack joins the external Docker network `ewolution`, where Census listens as `census:4901` and
+  Dashboard's apps' port as `dashboard:8081`.
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `PORT` / `--port` | `8080` | Listen port |
 | `HOST` | `0.0.0.0` | Listen address |
 | `AALE_SPIELE_CENSUS` | off | Census's ingest origin, `http://census:4901` on the NAS |
+| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS; off, every game shows |
 
 ## Project layout
 
@@ -72,6 +84,8 @@ This mirrors Cantina and Atrium:
 server/server.mjs         static files + security headers, no dependencies
 server/census.mjs         forwards /_e.js and /_e to Census (visit counts)
 src/lib/games.ts          the games: links, texts (DE/EN), kinds, tile colours
+src/lib/family.ts         Dashboard's manifest and Atrium's tiles, built from the games
+src/lib/config.ts         the games Dashboard leaves on, in its order
 src/lib/glyphs.ts         each game's mark (64-unit SVG)
 src/lib/field.ts          the dot field and the draw's ripple
 src/components/           Picker (the draw), Games + GameCard, Tile, Bar, Footer

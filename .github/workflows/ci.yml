@@ -57,3 +57,25 @@ jobs:
           # The Census forwarder is wired in; without AALE_SPIELE_CENSUS it answers locally.
           test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:5699/_e.js)" = 200
           test "$(curl -s -o /dev/null -w '%{http_code}' -X POST --data '{}' http://127.0.0.1:5699/_e)" = 204
+          # Without Dashboard: its values block in the page, every game in /games.json, the manifest built from games.ts.
+          curl -sf http://127.0.0.1:5699/ | grep -q '<script type="application/json" id="ewo-config">{"games":\[{"id":"skribbl","on":true}'
+          test "$(curl -sf http://127.0.0.1:5699/games.json | grep -o '"slug":' | wc -l | tr -d ' ')" = 20
+          curl -sf http://127.0.0.1:5699/ewo.config.json | grep -q '"app": "aale-spiele"'
+
+      # The server against a stand-in for Dashboard's apps' port: it takes the manifest, and a game
+      # turned off there leaves the page and /games.json.
+      - name: Smoke test Dashboard's values
+        run: |
+          node --input-type=module -e "
+            import http from 'node:http';
+            http.createServer((req, res) => {
+              if (req.method === 'PUT' && req.url === '/v1/manifest/aale-spiele') { req.resume(); return res.writeHead(204).end(); }
+              if (req.url === '/v1/config/aale-spiele') return res.writeHead(200, { 'content-type': 'application/json', etag: '\"1\"' }).end(JSON.stringify({ family: {}, app: { games: [{ id: 'skribbl', on: false }] } }));
+              res.writeHead(404).end();
+            }).listen(5698);
+          " &
+          DASHBOARD_URL=http://127.0.0.1:5698 PORT=5697 node server/server.mjs &
+          for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5697/healthz && break; sleep 0.5; done
+          for _ in $(seq 1 20); do curl -sf http://127.0.0.1:5697/games.json | grep -q '"slug":"skribbl"' || break; sleep 0.5; done
+          test "$(curl -sf http://127.0.0.1:5697/games.json | grep -o '"slug":' | wc -l | tr -d ' ')" = 19
+          curl -sf http://127.0.0.1:5697/ | grep -q '{"id":"skribbl","on":false}'

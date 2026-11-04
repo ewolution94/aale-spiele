@@ -29,9 +29,12 @@ services:
       # Visit counts: /_e and /_e.js are forwarded to Census over the `ewolution` network.
       # Remove the line to stop counting; the page doesn't change either way.
       - AALE_SPIELE_CENSUS=http://census:4901
+      # The games on and off and in order, from Dashboard's apps' port over the `ewolution`
+      # network. Remove the line and the page shows every game, as it ships.
+      - DASHBOARD_URL=http://dashboard:8081
     networks:
-      # The shared network Census listens on. It must exist before this stack is created
-      # (Portainer → Networks → `ewolution`).
+      # The shared network Census and Dashboard listen on. It must exist before this stack is
+      # created (Portainer → Networks → `ewolution`).
       - ewolution
     labels:
       # The opt-in the shared Watchtower looks for (it runs with

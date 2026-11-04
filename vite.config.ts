@@ -2,6 +2,9 @@ import { defineConfig, type Plugin } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 // @ts-expect-error plain ESM module shared with the production server
 import { createCensus } from './server/census.mjs';
+import { GAMES } from './src/lib/games';
+import { GLYPHS } from './src/lib/glyphs';
+import { manifest, tiles } from './src/lib/family';
 
 // The same Census forwarder the production server uses (with no target it counts nothing), so
 // dev and prod answer /_e.js and /_e alike.
@@ -22,8 +25,21 @@ function census(): Plugin {
   };
 }
 
+// Dashboard's manifest and the games as Atrium's tile draws them, written from the list into the
+// build (src/lib/family.ts); the production server reads both from dist/.
+function family(): Plugin {
+  return {
+    name: 'aale-spiele-family',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'ewo.config.json', source: `${JSON.stringify(manifest(GAMES), null, 2)}\n` });
+      this.emitFile({ type: 'asset', fileName: 'games.json', source: JSON.stringify(tiles(GAMES, GLYPHS)) });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [svelte(), census()],
+  plugins: [svelte(), census(), family()],
   // 5600 is the NAS port; locally Libretto's dev server holds it (its Spotify redirect URI).
   server: { port: 5620, strictPort: true },
   preview: { port: 5621, strictPort: true },

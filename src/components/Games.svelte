@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { GROUPS, type Game, type Group } from '../lib/games';
+  import type { Game, Group } from '../lib/games';
   import { t } from '../lib/i18n.svelte';
   import GameCard from './GameCard.svelte';
 
   let {
     games,
+    kinds,
     filter,
     chosen,
     onfilter,
-  }: { games: Game[]; filter: Group | 'all'; chosen: Game | null; onfilter: (filter: Group | 'all') => void } = $props();
+  }: { games: Game[]; kinds: Group[]; filter: Group | 'all'; chosen: Game | null; onfilter: (filter: Group | 'all') => void } = $props();
 
-  const options = $derived([{ value: 'all', label: t('all') }, ...GROUPS.map((g) => ({ value: g, label: t(g) }))]);
+  const options = $derived([{ value: 'all', label: t('all') }, ...kinds.map((g) => ({ value: g, label: t(g) }))]);
 </script>
 
 <section class="games" aria-label={t('games', { n: games.length })}>
