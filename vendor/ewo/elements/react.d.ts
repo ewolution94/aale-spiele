@@ -10,7 +10,7 @@
 // can produce this from custom-elements.json.
 
 import type { DOMAttributes, HTMLAttributes, Key, Ref } from 'react';
-import type { EwoBadge, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
+import type { EwoBadge, EwoButton, EwoField, EwoReorder, EwoTable, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoSlider, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
 
 type Base<E> = Omit<HTMLAttributes<E>, 'onChange' | 'onInput' | 'onLoad' | 'onError' | 'onCancel' | 'onClose'> &
   Pick<DOMAttributes<E>, 'children'> & {
@@ -38,6 +38,23 @@ declare module 'react' {
         onchange?: Handler<{ value: string }>;
         oninput?: Handler<{ value: string }>;
       };
+      'ewo-slider': Base<EwoSlider> & {
+        value?: number;
+        min?: number;
+        max?: number;
+        step?: number;
+        mark?: number | null;
+        label?: string;
+        unit?: string;
+        name?: string;
+        ticks?: boolean;
+        ends?: boolean;
+        nobubble?: boolean;
+        disabled?: boolean;
+        format?: ((value: number) => string) | null;
+        onchange?: Handler<{ value: number }>;
+        oninput?: Handler<{ value: number }>;
+      };
       'ewo-switch': Base<EwoSwitch> & {
         checked?: boolean;
         disabled?: boolean;
@@ -46,6 +63,48 @@ declare module 'react' {
         name?: string;
         value?: string;
         onchange?: Handler<{ checked: boolean }>;
+      };
+      'ewo-button': Base<EwoButton> & {
+        variant?: 'default' | 'primary' | 'quiet' | 'danger';
+        size?: 'sm' | 'md' | 'lg';
+        icon?: boolean;
+        label?: string;
+        stretch?: boolean;
+        disabled?: boolean;
+        type?: 'button' | 'submit' | 'reset';
+        href?: string;
+        target?: string;
+        download?: string;
+      };
+      'ewo-field': Base<EwoField> & {
+        label?: string;
+        nolabel?: boolean;
+        value?: string;
+        placeholder?: string;
+        hint?: string;
+        error?: string;
+        type?: 'text' | 'search' | 'url' | 'email' | 'number' | 'tel';
+        multiline?: boolean;
+        rows?: number;
+        autogrow?: boolean;
+        maxlength?: number;
+        counter?: boolean;
+        size?: 'sm' | 'md';
+        name?: string;
+        required?: boolean;
+        disabled?: boolean;
+        readonly?: boolean;
+        autocomplete?: string;
+        inputmode?: string;
+        onchange?: Handler<{ value: string }>;
+        oninput?: Handler<{ value: string }>;
+      };
+      'ewo-table': Base<EwoTable> & { label?: string; density?: 'normal' | 'compact'; nowrap?: boolean; sticky?: boolean; hover?: boolean };
+      'ewo-reorder': Base<EwoReorder> & {
+        label?: string;
+        arrows?: boolean;
+        disabled?: boolean;
+        onchange?: Handler<{ order: string[]; key: string; from: number; to: number }>;
       };
       'ewo-emblem': Base<EwoEmblem> & {
         theme?: 'heraldry' | 'doodle' | 'token' | 'tag' | 'agent';
