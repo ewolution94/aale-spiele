@@ -2823,7 +2823,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Overrides \"System\" (both rows)."
+              "description": "Overrides \"Default\" / \"Standard\" (both rows): the value `system`, whatever the family or the device says."
             },
             {
               "name": "light-label",
@@ -4761,6 +4761,614 @@
           "declaration": {
             "name": "EwoTicks",
             "module": "ticks.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "tile-grid.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tiles on a grid of cells: drag one to move it (the tiles in its way make room), its edge to resize it.",
+          "name": "EwoTileGrid",
+          "cssProperties": [
+            {
+              "description": "A row's height (default 40px).",
+              "name": "--ewo-tile-grid-row"
+            },
+            {
+              "description": "The gap between cells (default 4px).",
+              "name": "--ewo-tile-grid-gap"
+            },
+            {
+              "description": "A tile's padding (default 6px).",
+              "name": "--ewo-tile-grid-pad"
+            },
+            {
+              "description": "A tile's background (default the raised background).",
+              "name": "--ewo-tile-grid-bg"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "grid"
+            },
+            {
+              "description": "Each empty cell's outline.",
+              "name": "cell"
+            },
+            {
+              "description": "The element's box around each child.",
+              "name": "tile"
+            },
+            {
+              "description": "Where a dragged tile will land.",
+              "name": "ghost"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The tiles, one child each, with `data-key`, `data-rect` (\"column row width height\"), and optionally `data-min` (\"width height\") and `data-label` (its name, if its text isn't one).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[styles]"
+            },
+            {
+              "kind": "field",
+              "name": "#grid",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "default": "this.root.querySelector('.grid')!"
+            },
+            {
+              "kind": "field",
+              "name": "#ghost",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "default": "this.root.querySelector('.ghost')!"
+            },
+            {
+              "kind": "field",
+              "name": "#live",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "default": "this.root.querySelector('.live')!"
+            },
+            {
+              "kind": "field",
+              "name": "#tiles",
+              "privacy": "private",
+              "default": "new Map<Element, Tile>()"
+            },
+            {
+              "kind": "field",
+              "name": "#cells",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "#press",
+              "privacy": "private",
+              "type": {
+                "text": "Press | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#drag",
+              "privacy": "private",
+              "type": {
+                "text": "Drag | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#refocus",
+              "privacy": "private",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#observer",
+              "privacy": "private",
+              "default": "new MutationObserver(() => this.#build())"
+            },
+            {
+              "kind": "field",
+              "name": "#unlisten",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#settling",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "compact"
+            },
+            {
+              "kind": "field",
+              "name": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "Tiles"
+              },
+              "description": "Every shown tile's rect by key, as the page set them.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#items",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLElement[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#key",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#rect",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Rect | null"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#min",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "[number, number]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#name",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "el",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#byKey",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#options",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#build",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#tileOf",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#rows",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "used",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#tile",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Tile"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#label",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#keydown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "tile",
+                  "type": {
+                    "text": "Tile"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#down",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "PointerEvent"
+                  }
+                },
+                {
+                  "name": "tile",
+                  "type": {
+                    "text": "Tile"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#cancelPress",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#escape",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#pitch",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Pitch"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#lift",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "press",
+                  "type": {
+                    "text": "Press"
+                  }
+                },
+                {
+                  "name": "x",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#follow",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#preview",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "tiles",
+                  "type": {
+                    "text": "Tiles"
+                  }
+                },
+                {
+                  "name": "d",
+                  "type": {
+                    "text": "Drag"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#show",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "r",
+                  "type": {
+                    "text": "Rect | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#glide",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "tiles",
+                  "type": {
+                    "text": "Tile[]"
+                  }
+                },
+                {
+                  "name": "rectOf",
+                  "type": {
+                    "text": "(tile: Tile) => Rect | undefined"
+                  }
+                },
+                {
+                  "name": "before",
+                  "default": "this.#drawn(tiles)"
+                }
+              ],
+              "description": "Puts tiles at new rects and lets each glide there from where it's drawn now (FLIP): its new\nplace measured without its translate, then the difference undone and let go."
+            },
+            {
+              "kind": "method",
+              "name": "#drawn",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "tiles",
+                  "default": "[...this.#tiles.values()]"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#scroll",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#end",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "drop",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#commit",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "next",
+                  "type": {
+                    "text": "Arranged"
+                  }
+                },
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "action",
+                  "type": {
+                    "text": "'move' | 'resize'"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#settle",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "before",
+                  "type": {
+                    "text": "Map<Tile, DOMRect>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "innerHTML",
+              "type": {
+                "text": "string"
+              },
+              "default": "'<div class=\"grid\" part=\"grid\" role=\"group\"><div class=\"ghost\" part=\"ghost\" hidden><span></span></div></div><div class=\"live\" role=\"status\" aria-live=\"polite\"></div><span id=\"help\" hidden></span>'"
+            }
+          ],
+          "events": [
+            {
+              "description": "`detail: { layout, key, moved, how, action }` when a tile is dropped or stepped somewhere new: `layout` is every tile's new rect by key, `moved` the other tiles that made room, `how` 'free', 'swap' or 'push', `action` 'move' or 'resize'.",
+              "name": "change"
+            },
+            {
+              "description": "`detail: { key }` when a tile gets the focus (a click or a tap selects it).",
+              "name": "tile-focus"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Names the grid."
+            },
+            {
+              "name": "columns",
+              "type": {
+                "text": "number"
+              },
+              "description": "The grid's columns (default 12)."
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Only shown: no dragging, no keys, no spare row."
+            },
+            {
+              "name": "compact",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Gaps close after every change: each tile rises as far as it can."
+            }
+          ],
+          "superclass": {
+            "name": "EwoElement",
+            "module": "/packages/elements/src/base"
+          },
+          "tagName": "ewo-tile-grid",
+          "customElement": true
+        },
+        {
+          "kind": "variable",
+          "name": "tile"
+        },
+        {
+          "kind": "variable",
+          "name": "mode"
+        },
+        {
+          "kind": "variable",
+          "name": "touch"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "EwoTileGrid",
+          "declaration": {
+            "name": "EwoTileGrid",
+            "module": "tile-grid.js"
           }
         }
       ]

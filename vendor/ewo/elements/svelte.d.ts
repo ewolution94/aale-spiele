@@ -6,7 +6,7 @@
 // listens for the element's own change event.
 
 import type { HTMLAttributes } from 'svelte/elements';
-import type { EwoBadge, EwoButton, EwoField, EwoReorder, EwoTable, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoSlider, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
+import type { EwoBadge, EwoButton, EwoField, EwoReorder, EwoTileGrid, EwoTable, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoSlider, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick, Tiles } from './index';
 
 type Handler<E, D> = (event: CustomEvent<D> & { currentTarget: E }) => void;
 
@@ -91,6 +91,14 @@ declare module 'svelte/elements' {
       arrows?: boolean;
       disabled?: boolean;
       onchange?: Handler<EwoReorder, { order: string[]; key: string; from: number; to: number }>;
+    };
+    'ewo-tile-grid': Omit<HTMLAttributes<EwoTileGrid>, 'onchange'> & {
+      label?: string;
+      columns?: number;
+      compact?: boolean;
+      disabled?: boolean;
+      onchange?: Handler<EwoTileGrid, { layout: Tiles; key: string; moved: string[]; how: 'free' | 'swap' | 'push'; action: 'move' | 'resize' }>;
+      'ontile-focus'?: Handler<EwoTileGrid, { key: string }>;
     };
     'ewo-badge': HTMLAttributes<EwoBadge> & {
       tone?: 'neutral' | 'ok' | 'warn' | 'bad' | 'info' | 'unknown' | 'accent';

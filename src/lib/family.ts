@@ -3,9 +3,10 @@
 // deploy:
 //
 // - `manifest`: what it takes from Dashboard (dashboard.ewolution.cloud, plans/dashboard.md in the
-//   workspace), the games on and off and in order. The server announces dist/ewo.config.json.
+//   workspace), the games on and off and in order, and the family's language and theme for a
+//   device that hasn't picked (src/lib/defaults.ts). The server announces dist/ewo.config.json.
 //   Every value starts empty: until something is set there, the page shows every game in
-//   games.ts's order, exactly as it ships.
+//   games.ts's order and follows the browser's language and the system's theme, exactly as it ships.
 // - `tiles`: every game as Atrium's tile draws it. The server answers /games.json with the ones
 //   Dashboard leaves on, in its order.
 //
@@ -39,6 +40,8 @@ export function manifest(games: readonly Game[]) {
           on: { type: 'bool', default: true, label: { en: 'In the list and the draw', de: 'In der Liste und der Ziehung' } },
         },
       },
+      lang: { family: true },
+      theme: { family: true },
     },
   };
 }

@@ -1,8 +1,10 @@
-// German and English, following the browser until a language is picked in Settings. The choice
-// is kept under `ewo:lang` (the landing's key; System removes it); public/boot.js applies it
-// before first paint.
+// German and English: the one picked in Settings, else Dashboard's default (#ewo-config), else the
+// browser's (src/lib/defaults.ts). The choice is kept under `ewo:lang` (the landing's key; Default
+// removes it); public/boot.js applies the same before first paint.
 
+import { readConfig } from '../../vendor/ewo/elements/config-client.js';
 import { themeShift } from '../../vendor/ewo/elements/theme-shift.js';
+import { languageFor } from './defaults';
 import type { Lang } from './games';
 
 const KEY = 'ewo:lang';
@@ -21,7 +23,7 @@ function storedPref(): LangPref {
   return 'system';
 }
 
-const resolve = (pref: LangPref): Lang => (pref === 'system' ? browser() : pref);
+const resolve = (pref: LangPref): Lang => languageFor(pref, readConfig().lang, browser());
 
 /** `pref`: the choice in Settings. `lang`: the language on screen, which follows it. */
 export const i18n = $state({ pref: storedPref(), lang: resolve(storedPref()) });
@@ -47,9 +49,9 @@ export function setLanguage(pref: LangPref) {
   if (next !== i18n.lang) themeShift(() => show(next));
 }
 
-// The browser's own language changing under System applies at once.
+// The browser's own language changing under Default applies at once (unless Dashboard set one).
 addEventListener('languagechange', () => {
-  if (i18n.pref === 'system') show(browser());
+  if (i18n.pref === 'system') show(resolve('system'));
 });
 
 const STRINGS = {

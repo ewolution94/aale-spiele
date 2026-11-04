@@ -1,15 +1,23 @@
-// Applies the saved theme and language before first paint, so there's no flash of the wrong
-// one, and pins theme-color to the theme (it colours an installed app's status bar). The keys
-// are the shared ones (`ewo:theme`, `ewo:lang`; a missing key means System); keep in step with
-// src/lib/i18n.svelte.ts and src/lib/theme.svelte.ts (Folio's setTheme).
+// Applies the theme and language before first paint, so there's no flash of the wrong one, and
+// pins theme-color to the theme (it colours an installed app's status bar): the ones saved on this
+// device, else Dashboard's defaults (#ewo-config, which the server puts first in <head>), else the
+// system's and the browser's. The keys are the shared ones (`ewo:theme`, `ewo:lang`; a missing key
+// means Default); keep in step with src/lib/i18n.svelte.ts, src/lib/theme.svelte.ts (Folio's
+// setTheme) and src/lib/defaults.ts.
+var ewoConfig = {};
+try {
+  ewoConfig = JSON.parse(document.getElementById('ewo-config').textContent) || {};
+} catch (e) {}
 try {
   var theme = localStorage.getItem('ewo:theme');
+  if (theme !== 'light' && theme !== 'dark') theme = ewoConfig.theme;
   if (theme === 'light' || theme === 'dark') {
     document.documentElement.dataset.theme = theme;
     var metas = document.querySelectorAll('meta[name="theme-color"]');
     for (var i = 0; i < metas.length; i++) metas[i].content = theme === 'light' ? '#f5f4f1' : '#09090b';
   }
   var lang = localStorage.getItem('ewo:lang');
+  if (lang !== 'en' && lang !== 'de') lang = ewoConfig.lang;
   if (lang !== 'en' && lang !== 'de') lang = (navigator.language || '').toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
   document.documentElement.lang = lang;
 } catch (e) {}

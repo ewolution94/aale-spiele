@@ -31,7 +31,10 @@ beacon, and takes the games' order and on/off from Dashboard.
   and asks for the values every 15 s with an ETag (Folio's `config-server`), puts them into the page as
   a JSON block (`#ewo-config`), and `src/lib/config.ts` shows the games they leave on, in their order;
   a kind with none left drops out of the filter. Until Dashboard answers, or while it's down, every
-  game shows in `games.ts`'s order, exactly as before. Never part of `/healthz`.
+  game shows in `games.ts`'s order, exactly as before. Never part of `/healthz`. It also sets the
+  language and theme a device that hasn't picked one starts from (the family's, or Aale Spiele's own:
+  `src/lib/defaults.ts`, and `public/boot.js` before first paint); a choice made on the device wins,
+  and with nothing set it's the browser's language and the system's theme, as before.
 - **`/games.json`** is that same list with each game's tile drawing (name, address, colours, mark),
   for Atrium's tile.
 
@@ -76,7 +79,7 @@ This mirrors Cantina and Atrium:
 | `PORT` / `--port` | `8080` | Listen port |
 | `HOST` | `0.0.0.0` | Listen address |
 | `AALE_SPIELE_CENSUS` | off | Census's ingest origin, `http://census:4901` on the NAS |
-| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS; off, every game shows |
+| `DASHBOARD_URL` | off | Dashboard's apps' port, `http://dashboard:8081` on the NAS: the games on and off and in order, and the language and theme a device that hasn't picked starts from (the family's, or Aale Spiele's own). Off or down: every game, and the built-in language and theme, as before |
 
 ## Project layout
 
@@ -86,6 +89,7 @@ server/census.mjs         forwards /_e.js and /_e to Census (visit counts)
 src/lib/games.ts          the games: links, texts (DE/EN), kinds, tile colours
 src/lib/family.ts         Dashboard's manifest and Atrium's tiles, built from the games
 src/lib/config.ts         the games Dashboard leaves on, in its order
+src/lib/defaults.ts       the language and theme: the device's choice, else Dashboard's, else built-in
 src/lib/glyphs.ts         each game's mark (64-unit SVG)
 src/lib/field.ts          the dot field and the draw's ripple
 src/components/           Picker (the draw), Games + GameCard, Tile, Bar, Footer

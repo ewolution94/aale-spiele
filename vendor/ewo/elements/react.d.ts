@@ -10,7 +10,7 @@
 // can produce this from custom-elements.json.
 
 import type { DOMAttributes, HTMLAttributes, Key, Ref } from 'react';
-import type { EwoBadge, EwoButton, EwoField, EwoReorder, EwoTable, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoSlider, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick } from './index';
+import type { EwoBadge, EwoButton, EwoField, EwoReorder, EwoTileGrid, EwoTable, EwoEmblem, EwoEmblemMaker, EwoEmpty, EwoGuide, EwoHalftone, EwoSegmented, EwoSettingsBasics, EwoSettingsButton, EwoSheet, EwoSkeleton, EwoSlotReel, EwoSlider, EwoConnection, EwoSwitch, EwoThemeToggle, EwoTicks, EwoToaster, LanguageChoice, SegmentedOption, SettingsThemeChoice, Tick, Tiles } from './index';
 
 type Base<E> = Omit<HTMLAttributes<E>, 'onChange' | 'onInput' | 'onLoad' | 'onError' | 'onCancel' | 'onClose'> &
   Pick<DOMAttributes<E>, 'children'> & {
@@ -105,6 +105,14 @@ declare module 'react' {
         arrows?: boolean;
         disabled?: boolean;
         onchange?: Handler<{ order: string[]; key: string; from: number; to: number }>;
+      };
+      'ewo-tile-grid': Base<EwoTileGrid> & {
+        label?: string;
+        columns?: number;
+        compact?: boolean;
+        disabled?: boolean;
+        onchange?: Handler<{ layout: Tiles; key: string; moved: string[]; how: 'free' | 'swap' | 'push'; action: 'move' | 'resize' }>;
+        'ontile-focus'?: Handler<{ key: string }>;
       };
       'ewo-emblem': Base<EwoEmblem> & {
         theme?: 'heraldry' | 'doodle' | 'token' | 'tag' | 'agent';
